@@ -1,7 +1,7 @@
 ffpickup-logger
 ===============
 
-A tool to listen to Fortress Forever server logs via rcon, in order to trigger log parsing/demo grabbing for each round played.
+A tool to listen to [Fortress Forever](https://www.fortress-forever.com/) server logs via rcon, in order to trigger [log parsing](http://ffpickup.com/?p=logs)/[demo grabbing](http://ffpickup.com/?p=demos) for each round played.
 
 Note: `run.lua` is very ffpickup.com specific (and it requires a secret key to actually work with ffpickup.com). The files in `libs/` are more general (Source engine RCON and log-related stuff).
 
