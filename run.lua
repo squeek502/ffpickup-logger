@@ -16,6 +16,7 @@ local rcon_password = arg[3]
 local listen_ip = arg[4] -- if not specified, then public ip from rcon connection is used
 if listen_ip == "auto" then listen_ip = nil end
 local key = arg[5] or "" -- secret to stop random requests breaking things
+local server_name = arg[6] or "unknown"
 
 local listenhost = "0.0.0.0"
 local listenport = arg[1]
@@ -26,7 +27,7 @@ local last = {}
 local function reportLogEnd(log, map)
   if not log or not map then return end
   coroutine.wrap(function()
-    local url = 'http://ffpickup.com/parse.php?log='..log..'&map='..map..'&server=voss&key='..key
+    local url = 'http://ffpickup.com/parse.php?log='..log..'&map='..map..'&server='..server_name..'&key='..key
     local res, data = http.request('GET', url)
     if not res then
       print(res, data)

@@ -14,7 +14,7 @@ Note: `run.lua` is very ffpickup.com specific (and it requires a secret key to a
 ## Usage
 
 ```
-lua run.lua <listen_port> <server_ip> <rcon_password> <listen_ip> <ffpickup_key>
+lua run.lua <listen_port> <server_ip> <rcon_password> <listen_ip> <ffpickup_key> <ffpickup_server_name>
 ```
 
 Note: `listen_ip` can be set to `auto` to use your inferred public IP gotten when connecting to the server's rcon.
@@ -22,5 +22,5 @@ Note: `listen_ip` can be set to `auto` to use your inferred public IP gotten whe
 Example for testing a local server:
 
 ```
-lua run.lua 7131 192.168.0.1:27015 test 127.0.0.1 some_secret_string
+lua run.lua 7131 192.168.0.1:27015 test 127.0.0.1 some_secret_string some_server_name
 ```
