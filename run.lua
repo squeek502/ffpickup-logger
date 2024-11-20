@@ -23,7 +23,6 @@ local listenhost = "0.0.0.0"
 local listenport = arg[1]
 
 local current = {}
-local last = {}
 
 local function reportLogEnd(log, map)
   if not log or not map then return end
@@ -83,22 +82,15 @@ coroutine.wrap(function()
         local _, event, eventmsg = logline.parse(parsed.message)
         if event == "say" and eventmsg:match("^!ping") then
           coroutine.wrap(function()
-            local status = last.map ~= nil and "ok" or "need a map reset!"
+            local status = (current.map ~= nil and current.log ~= nil) and "ok" or "need a map reset!"
             tryRconOneShot("say pong: " .. status)
           end)()
         end
       elseif msg == "Log file closed" then
-        print('log file closed', tostring(current.map), tostring(last.map))
-        -- logs that have a map are assumed to be 'mapchange' logs
-        -- (which just list out the map and some cvar settings), so
-        -- logs without a map are the 'real' round logs.
-        -- we use the last log's map, though, since the map doesn't
-        -- show up anywhere in the 'real' round logs (which is pretty dumb)
-        if current.map == nil and last.map ~= nil then
-          reportLogEnd(current.log, last.map)
+        print('log file closed', tostring(current.map), tostring(current.log))
+        if current.map ~= nil and current.log ~= nil then
+          reportLogEnd(current.log, current.map)
         end
-        last.map = current.map
-        last.log = current.log
         current = {}
       elseif msg:match("^Log file started") then
         current.log = msg:match('file "logs[\\/]([^"]+)"')
