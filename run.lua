@@ -101,7 +101,7 @@ coroutine.wrap(function()
         last.log = current.log
         current = {}
       elseif msg:match("^Log file started") then
-        current.log = msg:match('file "logs\\([^"]+)"')
+        current.log = msg:match('file "logs[\\/]([^"]+)"')
       elseif msg:match("^Loading map") then
         current.map = msg:match('Loading map "([^"]+)"')
       end
