@@ -86,7 +86,7 @@ coroutine.wrap(function()
             tryRconOneShot("say pong: " .. status)
           end)()
         end
-      elseif msg == "Log file closed" then
+      elseif msg:match("^Log file closed") then
         print('log file closed', tostring(current.map), tostring(current.log))
         if current.map ~= nil and current.log ~= nil then
           reportLogEnd(current.log, current.map)
